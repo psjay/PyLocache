@@ -74,7 +74,7 @@ class LocalCacheTest(unittest.TestCase):
         batch_size = 10000
         cache = LocalCache(total * 2)
         threads = []
-        for i in range(0, total, batch_size / 2):
+        for i in range(0, total, int(batch_size / 2)):
             thread = threading.Thread(target=self.__cache_numbers,
                                       args=(cache, range(i, i + batch_size if i + batch_size <= total else total))
                                       )

@@ -1,5 +1,7 @@
 # PyLocache
 
+[![Build Status](https://travis-ci.org/psjay/PyLocache.svg?branch=master)](https://travis-ci.org/psjay/PyLocache)
+
 PyLocache is a Python implementation of LRU local cache.
 
 ## Usage
