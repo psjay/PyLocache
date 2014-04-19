@@ -1,10 +1,11 @@
+*.egg-info
 *.pyc
 *.swp
 bin
-tags
+build/
 develop-eggs
 dist
 downloads
 eggs
 parts
-*.egg-info
+tags
