@@ -4,9 +4,21 @@
 
 PyLocache is a Python implementation of LRU local cache.
 
+## Installation
+
+```python
+$ pip install pylocache
+```
+
+[virtualenv](https://pypi.python.org/pypi/virtualenv) is strongly recommended.
+
 ## Usage
 
 ```python
+
+from pylocache import LocalCache
+
+
 cache = LocalCache(max_size=5)
 cache.set('foo', 1)
 cache.set('bar', 2)
