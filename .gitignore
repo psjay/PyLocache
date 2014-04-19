@@ -1,0 +1,10 @@
+*.pyc
+*.swp
+bin
+tags
+develop-eggs
+dist
+downloads
+eggs
+parts
+*.egg-info
