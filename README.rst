@@ -1,9 +1,16 @@
 PyLocache
 ===============
 
-.. image:: https://travis-ci.org/psjay/PyLocache.svg?branch=master   :target: https://travis-ci.org/psjay/PyLocache
+.. image:: https://travis-ci.org/psjay/PyLocache.svg?branch=master
 
 PyLocache is a Python implementation of LRU local cache.
+
+Features
+==============
+
+* Memcache-like APIs.
+* Thread safe.
+* Expiration support.
 
 Installation
 ===============
@@ -12,7 +19,7 @@ Installation
 
   $ pip install pylocache
 
-[virtualenv](https://pypi.python.org/pypi/virtualenv) is strongly recommended.
+`virtualenv <https://pypi.python.org/pypi/virtualenv>`_ is strongly recommended.
 
 Usage
 ===============
