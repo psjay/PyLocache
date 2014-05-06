@@ -21,6 +21,7 @@ class LocalCache(object):
 
             if e:
                 if e.expired:
+                    self._cache_content.pop(e.key)
                     self._remove(e)
                     return None
 
@@ -55,6 +56,7 @@ class LocalCache(object):
             if e is None:
                 return False
             else:
+                self._cache_content.pop(e.key)
                 self._remove(e)
                 return not e.expired
 
