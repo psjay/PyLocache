@@ -14,7 +14,7 @@ def read_file(*path):
 setup(
     name="PyLocache",
     url="https://github.com/psjay/PyLocache",
-    version="0.0.1",
+    version="0.0.2",
     license='WTFPL',
     description="PyLocache is a Python implementation of LRU local cache.",
     long_description=(

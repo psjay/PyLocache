@@ -48,6 +48,16 @@ class LocalCache(object):
             self._insert_head(e)
             self._cache_content[k] = e
 
+    def delete(self, k):
+        with self._lock:
+            e = self._cache_content.get(k, None)
+
+            if e is None:
+                return False
+            else:
+                self._remove(e)
+                return not e.expired
+
     def _insert_head(self, e):
         if not self._head:
             self._head = e
