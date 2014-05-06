@@ -21,6 +21,7 @@ class LocalCache(object):
 
             if e:
                 if e.expired:
+                    self._cache_content.pop(e.key)
                     self._remove(e)
                     return None
 
@@ -47,6 +48,17 @@ class LocalCache(object):
             e = Entry(k, v, expires or self._expires)
             self._insert_head(e)
             self._cache_content[k] = e
+
+    def delete(self, k):
+        with self._lock:
+            e = self._cache_content.get(k, None)
+
+            if e is None:
+                return False
+            else:
+                self._cache_content.pop(e.key)
+                self._remove(e)
+                return not e.expired
 
     def _insert_head(self, e):
         if not self._head:

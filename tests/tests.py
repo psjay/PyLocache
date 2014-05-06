@@ -22,6 +22,18 @@ class LocalCacheTest(unittest.TestCase):
             'bar': 2,
             'foo': 1,
             })
+        cache.set('hello', 'world')
+        eq_(dict(cache), {
+            'hello': 'world',
+            'bar': 2,
+            'foo': 1,
+            })
+        cache.delete('bar')
+        cache.delete('something')
+        eq_(dict(cache), {
+            'hello': 'world',
+            'foo': 1,
+            })
 
     def lru_test(self):
         cache = LocalCache(5)
