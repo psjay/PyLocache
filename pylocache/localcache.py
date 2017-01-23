@@ -15,7 +15,7 @@ class LocalCache(object):
         self._expires = expires
         self._lock = threading.RLock()
 
-    def get(self, k):
+    def get(self, k, default=None):
         with self._lock:
             e = self._cache_content.get(k, None)
 
@@ -23,7 +23,7 @@ class LocalCache(object):
                 if e.expired:
                     self._cache_content.pop(e.key)
                     self._remove(e)
-                    return None
+                    return default
 
                 if self._head is e:
                     return e.value
@@ -31,7 +31,7 @@ class LocalCache(object):
                 self._remove(e)
                 self._insert_head(e)
                 return e.value
-            return None
+            return default
 
     def set(self, k, v, expires=None):
         with self._lock:
@@ -86,10 +86,15 @@ class LocalCache(object):
             self._tail = e_pre
 
     def __iter__(self):
-        entry = self._head
-        while entry:
-            yield entry.key, entry.value
-            entry = entry.next_entry
+        entreis = []
+        with self._lock:
+            entry = self._head
+            while entry:
+                if not entry.expired:
+                    entreis.append(entry)
+                entry = entry.next_entry
+        for e in entreis:
+            yield e.key, e.value
 
 
 class Entry(object):
