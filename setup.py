@@ -28,7 +28,8 @@ setup(
     zip_safe=False,
     packages=find_packages(),
     install_requires=[],
-    tests_require=['Nose'],
+    test_suite='nose.collector',
+    setup_requires=['nose>=1.0'],
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 2",

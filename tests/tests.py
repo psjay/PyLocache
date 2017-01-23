@@ -21,19 +21,19 @@ class LocalCacheTest(unittest.TestCase):
         eq_(dict(cache), {
             'bar': 2,
             'foo': 1,
-            })
+        })
         cache.set('hello', 'world')
         eq_(dict(cache), {
             'hello': 'world',
             'bar': 2,
             'foo': 1,
-            })
+        })
         cache.delete('bar')
         cache.delete('something')
         eq_(dict(cache), {
             'hello': 'world',
             'foo': 1,
-            })
+        })
 
     def lru_test(self):
         cache = LocalCache(5)
@@ -45,13 +45,13 @@ class LocalCacheTest(unittest.TestCase):
             ('1', 1),
             ('3', 3),
             ('2', 2),
-            ])
+        ])
         cache.set('2', 4)
         eq_(list(cache), [
             ('2', 4),
             ('1', 1),
             ('3', 3),
-            ])
+        ])
         eq_(len(list(cache)), 3)
 
     def max_size_test(self):
@@ -67,7 +67,7 @@ class LocalCacheTest(unittest.TestCase):
             ('4', 4),
             ('3', 3),
             ('2', 2),
-            ])
+        ])
 
     def expires_test(self):
         cache = LocalCache(3, expires=1)
@@ -99,3 +99,22 @@ class LocalCacheTest(unittest.TestCase):
     def __cache_numbers(self, cache, nums):
         for n in nums:
             cache.set(str(n), n)
+
+    def iterm_test(self):
+        cache = LocalCache(3)
+        cache.set('1', 1)
+        cache.set('2', 2, expires=2)
+        cache.set('3', 3)
+        time.sleep(3)
+        cached = set()
+        for key, value in cache:
+            cache.get(key)
+            cached.add((key, value))
+
+        assert cached == set([('1', 1), ('3', 3)])
+
+    def test_get_default(self):
+        cache = LocalCache(3)
+        assert cache.get('1', 1) == 1
+        assert cache.get('1', 2) == 2
+        assert not list(cache)
