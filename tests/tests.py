@@ -111,7 +111,7 @@ class LocalCacheTest(unittest.TestCase):
             cache.get(key)
             cached.add((key, value))
 
-        assert cached == set(('1', 1), ('3', 3))
+        assert cached == set([('1', 1), ('3', 3)])
 
     def test_get_default(self):
         cache = LocalCache(3)
